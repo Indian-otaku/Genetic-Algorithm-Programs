@@ -1,1 +1,1 @@
-Repository for storing some genetic algorithm programs
+Repository for storing some AI algorithms programs.
