@@ -1,6 +1,3 @@
-# Using genetic algorithm to solve travelling salesman problem (TSP)
-# https://en.wikipedia.org/wiki/Travelling_salesman_problem
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -136,8 +133,7 @@ class TSP_GA:
         plt.show()
 
 
-
-tsp = TSP_GA(mutation_rate=0.05, population_size=100, max_generations=150, early_stopping_count=None)
+tsp = TSP_GA(mutation_rate=0.05, population_size=100, max_generations=150)
 # tsp([[2, 1],
 #     [7, 2],
 #     [7, 8],
