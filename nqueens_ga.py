@@ -21,6 +21,8 @@ class NQueens:
             The maximum number of generations. Defaults to 50.
         """
 
+        if n_queens < 4:
+            raise ValueError("The number of queens must be at least 4.")
         self.mutation_rate = mutation_rate
         self.population_size = population_size
         self.max_generations = max_generations
@@ -307,5 +309,5 @@ class NQueens:
 
 
 if __name__ == "__main__":
-    nq = NQueens(n_queens=15, mutation_rate=0.1, population_size=100, max_generations=150)
+    nq = NQueens(n_queens=20, mutation_rate=0.1, population_size=200, max_generations=150)
     print("Solution is", nq())
