@@ -64,33 +64,39 @@ class TikTacToeState:
         return False
     
 
-class TikTacToeMinimaxSolver:    
-    def _max_value(self, state): 
+class TikTacToeAlphaBetaSolver:    
+    def _max_value(self, state, alpha, beta): 
         if TikTacToeState._terminal_test(state, -1):
             return state.utility_value
         value = -2
         for child in state.get_childrens(player=1):
-            value = max(value, self._min_value(child))
+            value = max(value, self._min_value(child, alpha, beta))
+            alpha = max(alpha, value)
+            if alpha >= beta:
+                break
         state.utility_value = value
         return value
     
-    def _min_value(self, state):
+    def _min_value(self, state, alpha, beta):
         if TikTacToeState._terminal_test(state, 1):
             return state.utility_value
         value = 2
         for child in state.get_childrens(player=-1):
-            value = min(value, self._max_value(child))
+            value = min(value, self._max_value(child, alpha, beta))
+            beta = min(beta, value)
+            if alpha >= beta:
+                break
         state.utility_value = value
         return value
     
     def get_next_move(self, state, player):
         if player == 1:
-            value = self._max_value(state)
+            value = self._max_value(state, alpha=-math.inf, beta=math.inf)
             for s in state.childrens:
                 if s.utility_value == value:
                     return s
         else:
-            value = self._min_value(state)
+            value = self._min_value(state, alpha=-math.inf, beta=math.inf)
             for s in state.childrens:
                 if s.utility_value == value:
                     return s
@@ -250,7 +256,7 @@ if __name__ == "__main__":
     start = perf_counter()
     state = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     root = TikTacToeState(state)
-    play = PlayTicTacToe(HumanPlayer(), TikTacToeMinimaxSolver())
+    play = PlayTicTacToe(HumanPlayer(), TikTacToeAlphaBetaSolver())
     play.play(terminal=False)
     end = perf_counter()
     print("It took total of ", end - start, " seconds")
