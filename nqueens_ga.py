@@ -309,5 +309,5 @@ class NQueens:
 
 
 if __name__ == "__main__":
-    nq = NQueens(n_queens=20, mutation_rate=0.1, population_size=200, max_generations=150)
+    nq = NQueens(n_queens=30, mutation_rate=0.1, population_size=200, max_generations=150)
     print("Solution is", nq())
